@@ -1,0 +1,102 @@
+<div>
+  //https://www.figma.com/file/KhNjky9Kr9uZl9SrrrZnOe/Soutenance?type=design&node-id=1-3&mode=design&t=Zu6yPKxQNiKF4ULN-0
+  <main class="bg-white-300 ml-60 mt-24 flex-1 p-3 overflow-hidden">
+    <div class="flex flex-col">
+      <!-- Stats Row Starts Here -->
+      <div class="flex flex-1 justify-between flex-col md:flex-row lg:flex-row mx-2">
+        <div
+          class="shadow-lg bg-[#7AA794] border-l-8 hover:bg-red-vibrant-dark border-red-vibrant-dark mb-2 p-2 md:w-1/4 mx-2">
+          <div class="p-4 flex flex-col">
+            <form>
+              <div class="flex text-white ">
+                <h1>Total Patient</h1>
+                <div class="relative w-full">
+                  <img src="/assets/images/patient.png" class="h-8 mr-3" alt="FlowBite Logo" />
+                </div>
+                <h1>28</h1>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="shadow bg-[#7AA794] border-l-8 hover:bg-info-dark border-info-dark mb-2 p-2 md:w-1/4 mx-2">
+          <div class="p-4 flex flex-col">
+            <div class="flex">
+
+              <div class="relative w-full">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="shadow bg-[#7AA794] border-l-8 hover:bg-success-dark border-success-dark mb-2 p-2 md:w-1/4 mx-2">
+          <div class="p-4 flex flex-col">
+            <div class="flex">
+
+
+              <div class="relative w-full">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Stats Row Ends Here -->
+
+      <!-- Card Sextion Starts Here -->
+      <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
+        <!-- card -->
+        <div class="rounded overflow-hidden shadow bg-white mx-2 w-full mt-6">
+          <div class="px-6 py-2 border-b  border-light-grey">
+            <div class="font-bold text-xl text-center ">Patient resents</div>
+          </div>
+          <div class="table-responsive ">
+            <table class="table text-grey-darkest w-full">
+              <thead class="text-white bg-[#7AA794] text-normal h-12">
+                <tr>
+                  <th scope="col">Nom</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Genre</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Etat</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr  class=" border-b border-[#7AA794]" *ngFor="let patient of patients">
+                  <th scope="row" class="px-6  font-medium  whitespace-nowrap dark:text-blue-100">
+                    {{patient.patient.nom}}
+                  </th>
+                  <td class="px-6 py-4">
+
+                  </td>
+                  <td class="px-6 py-4">
+
+                  </td>
+                  <td class="px-6 py-4">
+
+                  </td>
+                  <td class="px-6 py-4">
+
+                  </td>
+
+                  <td class="px-6 py-4">
+                    <!-- <button
+                      data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                      class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      type="button">
+                      AjouterSession
+                    </button> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+        <!-- /card -->
+      </div>
+    </div>
+  </main>
