@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class ServiceAuthService {
+  
   authenticatedUser: User | undefined;
 
   constructor(private http: HttpClient) { }

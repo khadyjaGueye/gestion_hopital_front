@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Data, Model } from '../interface/model';
+import { Data, Model, User } from '../interface/model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class RestServiceService<T> {
     return this.http.post<Model<Data>>(`${this.url}`,data);
   }
 
-  show(id:number):Observable<Model<Data>>{
+  show(id:string):Observable<Model<Data>>{
     return this.http.get<Model<Data>>(`${this.url}/${id}`);
   }
 

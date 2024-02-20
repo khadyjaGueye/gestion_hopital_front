@@ -4,10 +4,14 @@ export interface Model<T> {
 }
 
 export interface Data {
-  patient: Patient[]
+  patients: Patient[]
   users: User[]
   dossierMedicales: DossierMedicale[]
   medecins: User[]
+  patient:Patient
+  patient2?:Patient2
+  nbRendezVous:number;
+  message:string
 }
 export interface UserAuth {
   token: string
@@ -25,18 +29,21 @@ export interface User {
   patient:Patient
   specialite:string
 }
-
 export interface Patient {
-  id: number
-  nom: string
-  prenom: string
-  adresse: string
-  telephone: number
-  age: number
-  sexe: string
-  dossier_medical: DossierMedicale
+  patient: Patient2
+  medecin: User
 }
 
+export interface Patient2 {
+  id:number
+  nom: string
+  prenom: string
+  age:number
+  adresse: string
+  telephone: number
+  sexe: number
+  dossier_medical: DossierMedicale
+}
 export interface DossierMedicale {
   id: number
   dateEntre: Date

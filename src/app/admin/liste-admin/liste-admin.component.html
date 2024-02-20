@@ -1,56 +1,37 @@
 <div>
-  //https://www.figma.com/file/KhNjky9Kr9uZl9SrrrZnOe/Soutenance?type=design&node-id=1-3&mode=design&t=Zu6yPKxQNiKF4ULN-0
   <main class="bg-white-300 ml-60 mt-24 flex-1 p-3 overflow-hidden">
     <div class="flex flex-col">
-      <!-- Stats Row Starts Here -->
       <div class="flex flex-1 justify-between flex-col md:flex-row lg:flex-row mx-2">
-        <div
-          class="shadow-lg bg-[#7AA794] border-l-8 hover:bg-red-vibrant-dark border-red-vibrant-dark mb-2 p-2 md:w-1/4 mx-2">
-          <div class="p-4 flex flex-col">
-            <form>
-              <div class="flex text-white ">
-                <h1>Total Patient</h1>
-                <div class="relative w-full">
-                  <img src="/assets/images/patient.png" class="h-8 mr-3" alt="FlowBite Logo" />
+        <div class="flex flex-1 justify-between">
+          <div class="sm:text-2xl ml-5">
+            <form (ngSubmit)="recherche()" [formGroup]="searchForm">
+              <label for="default-search"
+                class="mb-2 text-sm ml-4 font-medium text-gray-900 sr-only dark:text-white">Search</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
                 </div>
-                <h1>28</h1>
+                <input type="search" id="default-search"(ngModel)="searchTerm" name="search" formControlName="search"
+                  class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-700 focus:border-[#6d9685] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-700 dark:focus:border-green-700"
+                  placeholder="Search" required>
+                <button type="submit"
+                  class="text-white absolute end-2.5 bottom-2.5 bg-[#7AA794] hover:bg-[#6d9685] focus:ring-4 focus:outline-none focus:ring-green-700 font-medium rounded-lg text-sm px-4 py-2 dark:bg-[#6d9685] dark:hover:bg-[#6d9685] dark:focus:ring-[#6d9685]">Search</button>
               </div>
             </form>
           </div>
-        </div>
-
-        <div class="shadow bg-[#7AA794] border-l-8 hover:bg-info-dark border-info-dark mb-2 p-2 md:w-1/4 mx-2">
-          <div class="p-4 flex flex-col">
-            <div class="flex">
-
-              <div class="relative w-full">
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shadow bg-[#7AA794] border-l-8 hover:bg-success-dark border-success-dark mb-2 p-2 md:w-1/4 mx-2">
-          <div class="p-4 flex flex-col">
-            <div class="flex">
-
-
-              <div class="relative w-full">
-
-              </div>
-
-            </div>
+          <div class="mt-5">
+            <button type="button" (click)="ouvrirModalAjout()"
+              class="focus:outline-none text-white bg-[#7AA794] hover:bg-green-800 focus:ring-4 focus:ring-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Ajouter</button>
           </div>
         </div>
       </div>
-      <!-- /Stats Row Ends Here -->
 
-      <!-- Card Sextion Starts Here -->
       <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
-        <!-- card -->
         <div class="rounded overflow-hidden shadow bg-white mx-2 w-full mt-6">
-          <div class="px-6 py-2 border-b  border-light-grey">
-            <div class="font-bold text-xl text-center ">Utilisateurs</div>
-          </div>
           <div class="table-responsive ">
             <table class="table text-grey-darkest w-full">
               <thead class="text-white bg-[#7AA794] text-normal h-12">
@@ -64,30 +45,279 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class=" border-b border-[#7AA794]" *ngFor="let user of users">
+                <tr class=" border-b border-[#7AA794]"
+                  *ngFor="let user of users | paginate: {itemsPerPage:5, currentPage:p}">
                   <td class="px-6 py-4">{{user.prenom}}</td>
                   <td class="px-6 py-4">{{user.nom}}</td>
                   <td class="px-6 py-4">{{user.email}}</td>
                   <td class="px-6 py-4">{{user.role}}</td>
                   <td class="px-6 py-4">{{user.specialite}}</td>
                   <td class="px-6 py-4">
-                    <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                      class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                      type="button">
-                      AjouterSession
-                    </button>
-                    <button class="inline-flex items-center justify-center w-8 h-8 mr-2 text-pink-100 transition-colors duration-150 bg-pink-700 rounded-lg focus:shadow-outline hover:bg-pink-800">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    <button (click)="editUser(user)" class="text-[#7AA794]" data-modal-target="authentication-modal">
+                      <svg class="inline-block h-8 w-8 " width="24" height="24" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                       </svg>
-                      </button>
+                    </button>
+                    <button (click)="detele(user.id)" id="deleteButton" data-modal-target="deleteModal"
+                      data-modal-toggle="deleteModal"
+                      class="inline-flex items-center justify-center w-8 h-8 mr-2 text-pink-100 transition-colors duration-150 bg-pink-700 rounded-lg focus:shadow-outline hover:bg-pink-800">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                    </button>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <!-- Modal pour l'ajout -->
+          <div tabindex="-1" aria-hidden="true" *ngIf="openModalAjout"
+            class="backdrop-brightness-50 fixed flex items-center justify-center z-50 w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative flex justify-center items-center w-full max-w-5xl max-h-screen ">
+              <!-- Modal content -->
+              <div class="relative w-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- <div class=""><span>{{message}}</span></div> -->
+                <button type="button" (click)="closemodale()"
+                  class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="authentication-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+                <main class="bg-white-500 flex-1 p-3 overflow-hidden">
+                  <form class="w-full" [formGroup]="formUserAjout">
+                    <div class="flex flex-col mt-10">
+
+                      <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2 ">
+                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                          <div
+                            class="bg-[#7AA794] px-2 py-3 border-solid border-gray-400 border-b text-white text-center">
+                            Ajouter un utilisateur
+                          </div>
+                          <div class="flex flex-wrap -mx-3 mb-2 ml-3 mt-6 mr-3">
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-city">
+                                Nom
+                              </label>
+                              <input formControlName="nom"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-city" type="text" placeholder="nom">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Prenom
+                              </label>
+                              <input formControlName="prenom"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-zip" type="text" placeholder="prenom">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Telephone
+                              </label>
+                              <input formControlName="telephone"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-zip" type="number" placeholder="telephone">
+                            </div>
+
+                          </div>
+                          <div class="flex flex-wrap -mx-3 mb-2 ml-3 mt-6 mr-3">
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-city">
+                                Email
+                              </label>
+                              <input formControlName="email"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-city" type="email" placeholder="email">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Specialité
+                              </label>
+                              <select name="" id="" formControlName="specialite"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey">
+                                <option value="">**********</option>
+                                <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
+                              </select>
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Role
+                              </label>
+                              <select name="" id="" formControlName="role"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey">
+                                <option value="">**********</option>
+                                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                              </select>
+                            </div>
+
+                          </div>
+                          <div class="flex justify-center mt-5">
+                            <button (click)="createUser()" type="button"
+                              class="text-white bg-[#7AA794] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Enregistrer</button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/Grid Form-->
+                    </div>
+                  </form>
+                </main>
+                <!--/Main-->
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- Modal pour la modification -->
+          <div tabindex="-1" aria-hidden="true" *ngIf="openModal"
+            class="backdrop-brightness-50 fixed flex items-center justify-center z-50 w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative flex justify-center items-center w-full max-w-5xl max-h-screen ">
+              <!-- Modal content -->
+              <div class="relative w-full bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- <div class=""><span>{{message}}</span></div> -->
+                <button type="button" (click)="closemodale()"
+                  class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-hide="authentication-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+                <main class="bg-white-500 flex-1 p-3 overflow-hidden">
+                  <form class="w-full" [formGroup]="formUser">
+                    <div class="flex flex-col mt-10">
+
+                      <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2 ">
+                        <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
+                          <div
+                            class="bg-[#7AA794] px-2 py-3 border-solid border-gray-400 border-b text-white text-center">
+                            Modifier un utilisateur
+                          </div>
+                          <div class="flex flex-wrap -mx-3 mb-2 ml-3 mt-6 mr-3">
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-city">
+                                Nom
+                              </label>
+                              <input formControlName="nom"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-city" type="text" placeholder="Albuquerque">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Prenom
+                              </label>
+                              <input formControlName="prenom"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-zip" type="text">
+                            </div>
+
+                          </div>
+                          <div class="flex flex-wrap -mx-3 mb-2 ml-3 mt-6 mr-3">
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-city">
+                                Email
+                              </label>
+                              <input formControlName="email"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-city" type="email" placeholder="Albuquerque">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Specialité
+                              </label>
+                              <input formControlName="specialite"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-zip" type="text">
+                            </div>
+                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
+                                for="grid-zip">
+                                Role
+                              </label>
+                              <input formControlName="role"
+                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                                id="grid-zip" type="text">
+                            </div>
+
+                          </div>
+                          <div class="flex justify-center mt-5">
+                            <button (click)="enregistreModification()" type="button"
+                              class="text-white bg-[#7AA794] hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Enregistrer</button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/Grid Form-->
+                    </div>
+                  </form>
+                </main>
+                <!--/Main-->
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal pour la suppression -->
+          <!-- Main modal -->
+          <div id="deleteModal" tabindex="-1" aria-hidden="true" *ngIf="openModalSuppression"
+            class="backdrop-brightness-50 fixed flex items-center justify-center z-50 w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+              <!-- Modal content -->
+              <div class="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                <button type="button" (click)="closemodale()"
+                  class="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  data-modal-toggle="deleteModal">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+                </button>
+                <svg class="text-gray-400 dark:text-gray-500 w-11 h-11 mb-3.5 mx-auto" aria-hidden="true"
+                  fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <p class="mb-4 text-gray-500 dark:text-gray-300">Confirmer votre supprimer</p>
+                <div class="flex justify-center items-center space-x-4">
+                  <button data-modal-toggle="deleteModal" type="button"
+                    class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    Annuler
+                  </button>
+                  <button type="submit"
+                    class="py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- /card -->
       </div>
     </div>
   </main>

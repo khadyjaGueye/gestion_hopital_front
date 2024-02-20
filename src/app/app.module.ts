@@ -11,6 +11,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { ListeAdminComponent } from './admin/liste-admin/liste-admin.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ListServiceComponent } from './admin/list-service/list-service.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +21,16 @@ import { ListeAdminComponent } from './admin/liste-admin/liste-admin.component';
     ListeComponent,
     AuthentificationComponent,
     AdminComponent,
-    ListeAdminComponent
+    ListeAdminComponent,
+    ListServiceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     {
