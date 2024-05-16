@@ -1,6 +1,6 @@
 <div>
   <main class="bg-white-300 ml-60 mt-24 flex-1 p-3 overflow-hidden">
-    <div class="flex flex-col">
+    <div class="ml-20 flex flex-col w-[90%]">
       <div class="flex flex-1 justify-between flex-col md:flex-row lg:flex-row mx-2">
         <div class="sm:text-2xl ml-5 mt-5">
           <form>
@@ -29,7 +29,13 @@
               <div class="flex text-white ">
                 <h1>Total Patient</h1>
                 <div class="relative w-full">
-                  <img src="/assets/images/patient.png" class="h-8 mr-3" alt="FlowBite Logo" />
+                  <!-- <img src="/assets/images/patient.png" class="h-8 mr-3" alt="FlowBite Logo" /> -->
+                  <svg class="w-[50px] h-[50px] fill-[#8e8e8e]" viewBox="0 0 576 512"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M142.4 21.9c5.6 16.8-3.5 34.9-20.2 40.5L96 71.1V192c0 53 43 96 96 96s96-43 96-96V71.1l-26.1-8.7c-16.8-5.6-25.8-23.7-20.2-40.5s23.7-25.8 40.5-20.2l26.1 8.7C334.4 19.1 352 43.5 352 71.1V192c0 77.2-54.6 141.6-127.3 156.7C231 404.6 278.4 448 336 448c61.9 0 112-50.1 112-112V265.3c-28.3-12.3-48-40.5-48-73.3c0-44.2 35.8-80 80-80s80 35.8 80 80c0 32.8-19.7 61-48 73.3V336c0 97.2-78.8 176-176 176c-92.9 0-168.9-71.9-175.5-163.1C87.2 334.2 32 269.6 32 192V71.1c0-27.5 17.6-52 43.8-60.7l26.1-8.7c16.8-5.6 34.9 3.5 40.5 20.2zM480 224a32 32 0 1 0 0-64 32 32 0 1 0 0 64z">
+                    </path>
+                  </svg>
                 </div>
                 <h1>{{nbRendezVous}}</h1>
               </div>
@@ -45,15 +51,15 @@
           <div class="table-responsive ">
             <table class="table text-grey-darkest w-full">
               <thead class="text-white bg-[#7AA794] text-normal h-12">
-                <tr>
+                <tr class="">
                   <th scope="col">Nom</th>
                   <th scope="col">Prenom</th>
                   <th scope="col">Adresse</th>
                   <th scope="col">Genre</th>
                   <th scope="col">Age</th>
                   <th scope="col">Telephone</th>
-                  <th scope="col">Symptomes</th>
-                  <th scope="col">Maladie</th>
+                  <!-- <th scope="col">Symptomes</th>
+                  <th scope="col">Maladie</th> -->
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -61,17 +67,17 @@
                 <ng-container *ngIf="!patient">
                   <tr class=" border-b border-[#7AA794]"
                     *ngFor="let patient of patients | paginate: {itemsPerPage:5, currentPage:p}">
-                    <td class="px-6 py-4">{{patient.patient.nom}}</td>
-                    <td class="px-6 py-4">{{patient.patient.prenom}}</td>
-                    <td class="px-6 py-4">{{patient.patient.adresse}}</td>
-                    <td class="px-6 py-4">{{patient.patient.sexe}}</td>
-                    <td class="px-6 py-4">{{patient.patient.age}}</td>
-                    <td class="px-6 py-4">{{patient.patient.telephone}}</td>
-                    <td class="px-6 py-4">{{patient.patient.dossier_medical.symptomes}}</td>
-                    <td class="px-6 py-4">{{patient.patient.dossier_medical.maladie_antecedent}}</td>
+                    <td class="px-6 py-4">{{patient.nom}}</td>
+                    <td class="px-6 py-4">{{patient.prenom}}</td>
+                    <td class="px-6 py-4">{{patient.adresse}}</td>
+                    <td class="px-6 py-4">{{patient.sexe}}</td>
+                    <td class="px-6 py-4">{{patient.age}}</td>
+                    <td class="px-6 py-4">{{patient.telephone}}</td>
+                    <!-- <td class="px-6 py-4">{{patient.dossier_medical.symptomes}}</td>
+                    <td class="px-6 py-4">{{patient.dossier_medical.maladie_antecedent}}</td> -->
                     <td class="px-6 py-4">
 
-                      <svg (click)="modalDossierMedical()" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      <svg (click)="modalDossierMedical(patient.id)" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke-width="1.5" data-modal-target="authentication-modal"
                         stroke="currentColor" class="w-6 h-6 text-green-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -96,7 +102,7 @@
                     <td class="px-6 py-4">{{patient.dossier_medical.symptomes}}</td>
                     <td class="px-6 py-4">{{patient.dossier_medical.maladie_antecedent}}</td>
                     <td class="px-6 py-4">
-                      <svg (click)="modalDossierMedical()" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      <svg (click)="modalDossierMedical(patient.id)" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke-width="1.5" data-modal-target="authentication-modal"
                         stroke="currentColor" class="w-6 h-6 text-green-600">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -118,7 +124,6 @@
           <div tabindex="-1" aria-hidden="true" *ngIf="openModal"
             class="backdrop-brightness-50 fixed flex items-center justify-center z-50 w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative flex justify-center items-center w-full max-w-5xl max-h-screen ">
-              <!-- Modal content -->
               <div class="relative w-full bg-white rounded-lg shadow dark:bg-gray-700">
                 <button type="button" (click)="closemodale()"
                   class="absolute16 top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -133,9 +138,7 @@
                 <main class="bg-white-500 flex-1 p-3 overflow-hidden">
                   <form class="w-full" [formGroup]="formDossier">
                     <div class="flex flex-col mt-10">
-                      <!-- Card Sextion Starts Here -->
                       <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2">
-                        <!--Horizontal form-->
                         <div
                           class="mb-2 border-solid border-grey-light rounded border shadow-sm w-full md:w-1/2 lg:w-1/2">
                           <div class="bg-[#7AA794] px-2 py-3 border-solid border-gray-400 border-b text-white">
@@ -144,7 +147,7 @@
                           <div class="p-3">
                             <div class="md:flex md:items-center mb-6">
                               <div class="md:w-1/4">
-                                <label class="block text-gray-500 font-regular md:text-right mb-1 md:mb-0 pr-4"
+                                <label class="block text-grey font-regular md:text-right mb-1 md:mb-0 pr-4"
                                   for="inline-full-name">
                                   Symptomes
                                 </label>
@@ -159,24 +162,11 @@
                               <div class="md:w-1/4">
                                 <label class="block text-grey font-regular md:text-right mb-1 md:mb-0 pr-4"
                                   for="inline-username">
-                                  Maladie
+                                  Diagnotic
                                 </label>
                               </div>
                               <div class="md:w-3/4">
                                 <input type="text" formControlName="maladie_antecedent"
-                                  class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                  id="grid-state">
-                              </div>
-                            </div>
-                            <div class="md:flex md:items-center mb-6">
-                              <div class="md:w-1/4">
-                                <label class="block text-grey font-regular md:text-right mb-1 md:mb-0 pr-4"
-                                  for="inline-username">
-                                  Numero
-                                </label>
-                              </div>
-                              <div class="md:w-3/4">
-                                <input type="number" formControlName="numero"
                                   class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                   id="grid-state">
                               </div>
@@ -186,16 +176,18 @@
                         <div
                           class="mb-2 md:mx-2 lg:mx-2 border-solid border-gray-200 rounded border shadow-sm w-full md:w-1/2 lg:w-1/2 ">
                           <div class="bg-[#7AA794] px-2 py-3 border-solid border-gray-400 border-b text-white">
-                            Bilan
+                            Description
                           </div>
                           <div class="md:flex md:items-center mb-6 mt-2 mr-2">
                             <div class="md:w-1/4">
                               <label class="block text-grey font-regular md:text-right mb-1 md:mb-0 pr-4"
                                 for="inline-username">
-                                Bilan
+                                Description
                               </label>
                             </div>
-                            <textarea formControlName="bilan" name="" id="" cols="30" rows="10"></textarea>
+                            <textarea
+                              class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                              formControlName="bilan" name="" id="" cols="30" rows="10"></textarea>
                           </div>
 
                         </div>
@@ -203,36 +195,28 @@
                       <div class="flex flex-1  flex-col md:flex-row lg:flex-row mx-2 ">
                         <div class="mb-2 border-solid border-gray-300 rounded border shadow-sm w-full">
                           <div class="bg-[#7AA794] px-2 py-3 border-solid border-gray-400 border-b text-white">
-                            Dates
+                            Antécedent du patient
                           </div>
-                          <div class="flex flex-wrap -mx-3 mb-2 ml-3 mt-6 mr-3">
-                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
-                                for="grid-city">
-                                DateEntree
-                              </label>
-                              <input formControlName="dateEntre" type="date" (change)="formatedDateEntree()"
-                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                id="grid-city"  placeholder="Albuquerque">
-                              <span class="text-red-700">{{formDossier.get("dateEntre")?.getError("message")}}</span>
-
+                          <div class="flex items-center mt-5 ml-5">
+                            <label class="mr-2">Maladie Héréditaire:</label>
+                            <div class="flex items-center mx-2">
+                              <input type="radio" (change)="onRadioChange($event)" class="mr-2" name="hereditaryDisease" value="yes">
+                              <label>Oui</label>
                             </div>
-                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                              <label class="block uppercase tracking-wide text-grey-darker text-xl font-light mb-1"
-                                for="grid-zip">
-                                DateSortie
-                              </label>
-                              <input formControlName="dateSortie" (change)="formatedDateSortie()"
-                                class="appearance-none block w-full bg-grey-200 text-grey-darker border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-grey"
-                                id="grid-zip" type="date">
-                                <span class="text-red-700">{{formDossier.get("dateSortie")?.getError("message")}}</span>
-
+                            <div class="flex items-center mx-2">
+                              <input type="radio" (change)="onRadioChange($event)" name="hereditaryDisease" value="no">
+                              <label>Non</label>
                             </div>
-
+                            <div *ngIf="showDescription">
+                              <label>Description:</label>
+                              <textarea
+                              class="block appearance-none w-full bg-grey-200 border border-grey-200 text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
+                              formControlName="description" name="" id="" cols="30" rows="10"></textarea>
+                            </div>
                           </div>
                           <div class="flex justify-center mt-5">
-                            <button type="button" (click)="ajoutDossierMedical()" [disabled]="formDossier.invalid"
-                              class="text-white bg-[#7AA794] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-700 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-700 dark:hover:bg-green-700 dark:focus:ring-green-700">Enregistrer</button>
+                            <button type="button" (click)="ajoutDossierMedical()"
+                              class="text-[#7AA794] bg-white border border-[#7AA794] hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-700 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-700 dark:hover:bg-green-700 dark:focus:ring-green-700">Enregistrer</button>
                           </div>
                         </div>
                       </div>

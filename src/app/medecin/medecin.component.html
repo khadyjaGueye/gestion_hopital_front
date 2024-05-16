@@ -1,3 +1,6 @@
+
+//https://sonatelacademy.com/wp-admin/post.php?post=621&action=elementor
+//https://sonatelacademy.com/index.php/ecsa/?preview_id=1263&preview_nonce=e6c77cbf87&preview=true
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
@@ -5,7 +8,7 @@
         <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
           type="button"
           class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-          <span class="sr-only">Open  sidebar</span>
+          <span class="sr-only">Open sidebar</span>
           <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd"
@@ -13,9 +16,10 @@
             </path>
           </svg>
         </button>
-        <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
+        <a class="flex ml-2 md:mr-24">
           <img src="/assets/images/logo.jpg" class="h-8 mr-3" alt="FlowBite Logo" />
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Hopital de Fann</span>
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Hopital de
+            Fann</span>
         </a>
       </div>
       <!-- <div class="sm:text-2xl">
@@ -45,8 +49,7 @@
               class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               aria-expanded="false" data-dropdown-toggle="dropdown-user">
               <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="/assets/images/medecin.jpeg"
-                alt="user photo">
+              <img class="w-8 h-8 rounded-full" src="/assets/images/medecin.jpeg" alt="user photo">
             </button>
             <div *ngIf="information">
               <p>Nom: {{nom}}</p>
@@ -104,45 +107,109 @@
         <li>
           <a
             class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <svg
-              class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-              <path
-                d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-              <path
-                d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-            </svg>
-            <span class="ml-3">Patient</span>
+            <!-- <svg class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+              <path d="M208 80c0-26.5 21.5-48 48-48h64c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-8v40H464c30.9 0 56 25.1 56 56v32h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H464c-26.5 0-48-21.5-48-48V368c0-26.5 21.5-48 48-48h8V288c0-4.4-3.6-8-8-8H312v40h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H256c-26.5 0-48-21.5-48-48V368c0-26.5 21.5-48 48-48h8V280H112c-4.4 0-8 3.6-8 8v32h8c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V368c0-26.5 21.5-48 48-48h8V288c0-30.9 25.1-56 56-56H264V192h-8c-26.5 0-48-21.5-48-48V80z"></path>
+            </svg> -->
+            <span
+              class="ml-3 no-underline text-white block h-full w-full border-b border-orange-darkest px-8 py-4 hover:bg-white hover:text-[#7AA794]">Dashboard</span>
+
           </a>
         </li>
         <li>
           <a
             class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
               <path
                 d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap">Calendrier</span>
+            <span
+              class="ml-3 no-underline text-white block h-full w-full border-b border-orange-darkest px-8 py-4 hover:bg-white hover:text-[#7AA794]"
+              (click)="getDossier()" [class.active]="isDossierSelected">Dosseir Médical</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <!-- <img src="/assets/images/pill.svg" alt=""> -->
+            <svg
+              class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+              <path
+                d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z" />
+            </svg>
+            <span
+              class=" no-underline text-white  h-full w-full border-b border-orange-darkest px-8 py-4 hover:bg-white hover:text-[#7AA794]"
+              (click)="getOrdonnance()" [class.active]="isDossierSelected">Ordonnance</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg
+              class="flex-shrink-0 w-[30px] h-[30px] fill-[#f5f2f2] transition duration-75 dark:text-[#181818] group-hover:text-[#181818] dark:group-hover:text-[#181818]"
+              viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z">
+              </path>
+            </svg>
+            <span
+              class="ml-3 no-underline text-white block h-full w-full border-b border-orange-darkest px-8 py-4 hover:bg-white hover:text-[#7AA794]" (click)="getCalendrier()">Calendrier</span>
           </a>
         </li>
       </div>
-      <div class="h-[20%] pt-20">
+      <div class="h-[20%] pt-14">
         <li class="">
           <a
             class="flex items-center p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <svg
-              class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              class="flex-shrink-0 w-5 h-5 text-white transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3" />
             </svg>
-            <span class="flex-1 ml-3 whitespace-nowrap" (click)="logout(userId)">Deconnexion</span>
+            <span
+              class="ml-3 no-underline text-white block h-full w-full border-b border-orange-darkest px-8 py-4 hover:bg-white hover:text-[#7AA794]"
+              (click)="logout(userId)">Deconnexion</span>
           </a>
         </li>
       </div>
     </ul>
   </div>
 </aside>
-<app-liste (updateDossier)="update($event)" [patients]="patients" [patient]="patient" [nbRendezVous]="nbRendezVous" (search)="rechercherNumereDossier($event)" (enregistrementDossier)="createDossierMedical($event)"></app-liste>
+<app-liste (updateDossier)="update($event)" [patients]="patients" [patient]="patient" [nbRendezVous]="nbRendezVous"
+  (search)="rechercherNumereDossier($event)" (enregistrementDossier)="createDossierMedical($event)"
+  *ngIf="display=='dossierMedical'"></app-liste>
+
+<app-ordonnance *ngIf="display=='ordonnance'" (createOrdonnance)="createOrdonnance($event)"></app-ordonnance>
+
+<app-calendrier *ngIf="display=='calendrier'"></app-calendrier>
+
+
+
+
+
+
+<!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com -->
+<!--Footer container-->
+<!-- <footer class="bg-gray-200 dark:bg-gray-800 fixed bottom-0 left-0 w-full" style="background-color: #7AA794">
+  <div class="container p-6">
+    <div class="">
+      <p class="flex items-center justify-center">
+        <span class="mr-4">Register for free</span>
+        <button type="button"
+          class="inline-block rounded-full border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+          data-te-ripple-init data-te-ripple-color="light">
+          Sign up!
+        </button>
+      </p>
+    </div>
+  </div>
+
+  Copyright section
+  <div class="w-full p-4 text-center" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2024 Copyright:
+    <a class="text-white" href="">Une passion pour donner la priorité aux patients</a>
+  </div>
+</footer> -->

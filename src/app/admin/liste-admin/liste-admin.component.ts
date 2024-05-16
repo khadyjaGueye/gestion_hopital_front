@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { User } from 'src/app/interface/model';
 import { CommunicationServiceService } from 'src/app/services/communication-service.service';
 
@@ -25,8 +26,10 @@ export class ListeAdminComponent implements OnInit {
   searchForm: FormGroup;
   searchTerm: string = '';
   usersListe: User[] = [];
-  roles: string[] = ['admin', 'medecin', 'receptionniste']
-  specialites: string[] = ['Cardiologie', 'Pediatrie', 'Chirurgie']
+  roles: string[] = ['admin', 'medecin', 'receptionniste'];
+  specialites: string[] = ['Cardiologie', 'Pediatrie', 'Chirurgie','Dentiste','Odontologie','Ophtalmologie','Dermatologie','Psychiatrie'];
+  dtOptions:DataTables.Settings = {};
+  dtTrigger:Subject<any> = new Subject<any>();
 
   constructor(private fb: FormBuilder, private commService: CommunicationServiceService) {
     this.formUser = fb.group({
@@ -51,6 +54,9 @@ export class ListeAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType : 'full_number'
+    }
     this.commService.userUpdated.subscribe((updateUser: User) => {
       const index = this.users.findIndex(user => user.id === updateUser.id);
       if (index !== -1) {

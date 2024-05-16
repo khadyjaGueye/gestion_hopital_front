@@ -13,6 +13,10 @@ import { AdminComponent } from './admin/admin.component';
 import { ListeAdminComponent } from './admin/liste-admin/liste-admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ListServiceComponent } from './admin/list-service/list-service.component';
+import { DataTablesModule } from 'angular-datatables';
+import { OrdonnanceComponent } from './medecin/ordonnance/ordonnance.component';
+import { CalendrierComponent } from './medecin/calendrier/calendrier.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -22,15 +26,19 @@ import { ListServiceComponent } from './admin/list-service/list-service.componen
     AuthentificationComponent,
     AdminComponent,
     ListeAdminComponent,
-    ListServiceComponent
+    ListServiceComponent,
+    OrdonnanceComponent,
+    CalendrierComponent
   ],
   imports: [
+    NgxPrintModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DataTablesModule,
   ],
   providers: [
     {

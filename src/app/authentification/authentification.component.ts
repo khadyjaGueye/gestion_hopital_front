@@ -30,7 +30,6 @@ export class AuthentificationComponent implements OnInit {
       if (response.status) {
         let token = response.token;
         let user = response.user;
-
         this.serviceAuth.authentificateUser(user, token).subscribe(resp => {
           if (user.role == "medecin") {
             this.router.navigateByUrl("/medecin");
@@ -49,6 +48,7 @@ export class AuthentificationComponent implements OnInit {
         icon: 'error',
         title: 'Oops...',
         text: this.message,
+        timer: 1500
       })
     })
   }

@@ -33,7 +33,7 @@
       <div class="flex flex-1 flex-col md:flex-row lg:flex-row mx-2">
         <div class="rounded overflow-hidden shadow bg-white mx-2 w-full mt-6">
           <div class="table-responsive ">
-            <table class="table text-grey-darkest w-full">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table text-grey-darkest w-full">
               <thead class="text-white bg-[#7AA794] text-normal h-12">
                 <tr>
                   <th scope="col">Prenom</th>
@@ -75,7 +75,7 @@
               </tbody>
             </table>
           </div>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
           <!-- Modal pour l'ajout -->
           <div tabindex="-1" aria-hidden="true" *ngIf="openModalAjout"
             class="backdrop-brightness-50 fixed flex items-center justify-center z-50 w-full  overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">

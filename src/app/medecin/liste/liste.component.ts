@@ -12,7 +12,7 @@ export class ListeComponent implements OnInit {
   @Input() patients: Patient[] = [];
   @Input() patient?: Patient2;
   @Input() nbRendezVous!: number
-  @Output() enregistrementDossier = new EventEmitter<DossierMedicale>();
+  @Output() enregistrementDossier = new EventEmitter<any>();
   @Output() search = new EventEmitter<string>();
   @Output() updateDossier = new EventEmitter<DossierMedicale>();
 
@@ -27,23 +27,26 @@ export class ListeComponent implements OnInit {
   dateValue?: string;
   dateEntreeValue?: string;
   dateSortieValue?: string;
+  showDescription = false;
+  idPatient: number = 1;
 
   constructor(private fb: FormBuilder) {
     this.formDossier = fb.group({
       symptomes: ['', [Validators.required]],
       maladie_antecedent: ['', [Validators.required]],
-      bilan: ['', [Validators.required]],
-      dateEntre: ['', [Validators.required, this.validateDate]],
-      dateSortie: ['', [Validators.required,this.validateDate]],
+      description: ['', [Validators.required]],
+      bilan: [],
+      // dateEntre: ['', [Validators.required, this.validateDate]],
+      // dateSortie: ['', [Validators.required,this.validateDate]],
       numero: ['', [Validators.required]]
     });
     this.formDossierModifier = fb.group({
       id: [''],
       symptomes: ['', [Validators.required]],
       maladie_antecedent: ['', [Validators.required]],
-      bilan: ['', [Validators.required]],
-      dateEntre: ['', [Validators.required]],
-      dateSortie: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      // dateEntre: ['', [Validators.required]],
+      // dateSortie: ['', [Validators.required]],
     });
   }
 
@@ -54,15 +57,23 @@ export class ListeComponent implements OnInit {
     //fermer modal
     this.openModal = false
   }
-  modalDossierMedical() {
+  modalDossierMedical(id: number) {
+    this.idPatient = id;
+    // console.log(this.idPatient);
     this.openModal = true;
-    console.log('rrrr');
-
   }
   ajoutDossierMedical() {
-    const dossier = this.formDossier.value;
-    this.enregistrementDossier.emit(dossier);
-    console.log(dossier);
+    let sym = this.formDossier.get("symptomes")?.value;
+    let mal = this.formDossier.get("maladie_antecedent")?.value;
+    let des = this.formDossier.get("bilan")?.value;
+
+    const data = {
+      symptomes: sym,
+      maladie_antecedent: mal,
+      bilan: des,
+      patient_id: this.idPatient
+    }
+    this.enregistrementDossier.emit(data);
     this.openModal = false;
   }
 
@@ -73,9 +84,7 @@ export class ListeComponent implements OnInit {
       id: dossier.id,
       symptomes: dossier.symptomes,
       maladie_antecedent: dossier.maladie_antecedent,
-      bilan: dossier.bilan,
-      dateEntre: dossier.dateEntre,
-      dateSortie: dossier.dateSortie,
+      description: dossier.bilan,
     });
   }
 
@@ -122,6 +131,13 @@ export class ListeComponent implements OnInit {
     return null
   }
 
+  onRadioChange(event: any) {
+    this.showDescription = false;
+    if (event.target.value === 'yes') {
+      this.showDescription = true;
+      //console.log(this.showDescription);
 
+    }
+  }
 
 }

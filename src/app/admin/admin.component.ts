@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../services/admin/admin.service';
-import { Data, Model, User } from '../interface/model';
+import { Data, Model, Service, User } from '../interface/model';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
 import { ServiceAuthService } from '../services/auth/service-auth.service';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -14,14 +15,14 @@ import Swal from 'sweetalert2';
 export class AdminComponent implements OnInit {
 
   users: User[] = [];
-
+  services: Service[] = [];
   userId!: number;
   nom!: string;
   prenom!: string;
   role!: string;
-  email!:string;
+  email!: string;
   message: string = "";
-  display:string = "service";
+  display: string = "service";
   information: boolean = false;
 
   constructor(private serviceAuth: ServiceAuthService, private adminService: AdminService, private router: Router) { }
@@ -37,10 +38,33 @@ export class AdminComponent implements OnInit {
       this.email = user.email
     }
     this.index();
+    this.listeService();
   }
 
   toggleUserMenu() {
     this.information = !this.information;
+  }
+
+  handleResponse<T>(responseOrError: T | HttpErrorResponse) {
+    if (responseOrError instanceof HttpErrorResponse) {
+      this.message = responseOrError.error.data.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: this.message,
+        timer: 1500
+      });
+    } else {
+      const response = responseOrError as Model<Data>;
+      this.message = response.data.message;
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: this.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
   }
 
   index() {
@@ -52,78 +76,69 @@ export class AdminComponent implements OnInit {
       //console.log(resp.data.users);
     });
   }
+
+  listeService() {
+    this.adminService.url = environment.apiBaseUrl + '/admin/liste/service';
+    return this.adminService.all().subscribe((resp: Model<Data>) => {
+      this.services = resp.data.services;
+    });
+  }
+
+  editerService(service: Service) {
+    this.adminService.url = environment.apiBaseUrl + '/admin/update/service';
+    const id = service.id;
+    return this.adminService.update(service, id).subscribe((resp: Model<Data>) => {
+      this.handleResponse(resp);
+
+    }, error => {
+      this.handleResponse(error);
+    })
+  }
+
+  createService(service: Service) {
+    this.adminService.url = environment.apiBaseUrl + '/admin/create/service';
+    return this.adminService.store(service).subscribe((resp: Model<Data>) => {
+      this.handleResponse(resp);
+    }, (error) => {
+      this.handleResponse(error);  // Pass the error to handleResponse
+    });
+  }
+
   edite(user: User) {
     this.adminService.url = environment.apiBaseUrl + '/admin/update/user';
     const id = user.id;
     return this.adminService.update(user, id).subscribe((resp: Model<Data>) => {
-      this.message = resp.data.message;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: this.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
-
+      this.handleResponse(resp);
     }, error => {
-      this.message = error.error.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: this.message,
-        timer: 1500
-      })
+     this.handleResponse(error);
     })
   }
+
   destroy(id: number) {
     this.adminService.url = environment.apiBaseUrl + '/admin/delete/user';
     return this.adminService.delete(id).subscribe((resp: Model<Data>) => {
-      this.message = resp.data.message;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: this.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.handleResponse(resp)
     }, error => {
-      this.message = error.error.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: this.message,
-        timer: 1500
-      })
+      this.handleResponse(error);
     })
   }
+
   createUser(user: User) {
     this.adminService.url = environment.apiBaseUrl + '/admin/create/user';
     return this.adminService.store(user).subscribe((resp: Model<Data>) => {
-
-      this.message = resp.data.message;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: this.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.handleResponse(resp)
     }, error => {
-      this.message = error.error.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: this.message,
-        timer: 1500
-      })
+      this.handleResponse(error);
     })
 
   }
+
   show(id: string) {
     return this.adminService.show(id).subscribe((resp: Model<Data>) => {
 
     })
   }
+
   logout(id: number) {
     this.serviceAuth.logout(id).subscribe(() => {
       localStorage.removeItem("token");
@@ -132,11 +147,11 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  getUser(){
+  getUser() {
     this.display = "user";
   }
 
-  getService(){
+  getService() {
     this.display = "service";
   }
 }

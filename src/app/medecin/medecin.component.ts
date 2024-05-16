@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { ServiceAuthService } from '../services/auth/service-auth.service';
 import { Router } from '@angular/router';
-import { Data, DossierMedicale, Model, Patient, Patient2, } from '../interface/model';
+import { Data, DossierMedicale, Model, Ordonnance, Patient, Patient2, } from '../interface/model';
 import { MedecinService } from '../services/medecin/medecin.service';
 import { environment } from 'src/environments/environment.development';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
+import { error } from 'jquery';
 
 @Component({
   selector: 'app-medecin',
@@ -26,6 +28,8 @@ export class MedecinComponent implements OnInit {
   specialite!: string;
   information: boolean = false;
   message: string = "";
+  display: string = "dossierMedical";
+  isDossierSelected = false;
 
   constructor(private serviceAuth: ServiceAuthService, private medecinService: MedecinService, private router: Router) { }
 
@@ -59,6 +63,27 @@ export class MedecinComponent implements OnInit {
       this.router.navigate(['/login']);
     })
   }
+  handleResponse<T>(responseOrError: T | HttpErrorResponse) {
+    if (responseOrError instanceof HttpErrorResponse) {
+      this.message = responseOrError.error.data.message;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: this.message,
+        timer: 1500
+      });
+    } else {
+      const response = responseOrError as Model<Data>;
+      this.message = response.data.message;
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: this.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  }
 
   index() {
     this.medecinService.url = environment.apiBaseUrl + '/medecin/liste/patients';
@@ -73,21 +98,9 @@ export class MedecinComponent implements OnInit {
     const id = dossier.id;
     return this.medecinService.update(dossier, id).subscribe((resp: Model<Data>) => {
       this.message = resp.data.message;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: this.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.handleResponse(resp);
     }, error => {
-      this.message = error.error.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: this.message,
-        timer: 1500
-      })
+      this.handleResponse(error);
     })
   }
 
@@ -95,28 +108,26 @@ export class MedecinComponent implements OnInit {
     this.medecinService.url = environment.apiBaseUrl + '/medecin/create/dossier';
     return this.medecinService.store(dossier).subscribe((resp: Model<Data>) => {
       this.message = resp.data.message;
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: this.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
+      this.handleResponse(resp);
     }, error => {
-      this.message = error.error.data.message;
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: this.message,
-        timer: 1500
-      })
+      this.handleResponse(error);
+    })
+  }
+
+  createOrdonnance(ordonnance: Ordonnance) {
+    this.medecinService.url = environment.apiBaseUrl + '/medecin/create/ordonnance';
+    return this.medecinService.store(ordonnance).subscribe((resp: Model<Data>) => {
+      this.message = resp.data.message;
+      this.handleResponse(resp);
+    }, error => {
+      this.handleResponse(error);
     })
   }
 
   rechercherNumereDossier(searchTerm: string) {
     this.medecinService.url = environment.apiBaseUrl + '/medecin/show/dossier';
     return this.medecinService.show(searchTerm).subscribe((resp: Model<Data>) => {
-     // console.log(resp);
+      // console.log(resp);
       this.patient = resp.data.patient2
       // console.log(this.patient);
     })
@@ -127,5 +138,20 @@ export class MedecinComponent implements OnInit {
       // console.log(resp);
       this.nbRendezVous = resp.data.nbRendezVous;
     })
+  }
+
+  getDossier() {
+    this.display = "dossierMedical"
+    this.isDossierSelected = true;
+  }
+
+  getOrdonnance() {
+    this.display = "ordonnance"
+    this.isDossierSelected = true;
+  }
+
+  getCalendrier() {
+    this.display = "calendrier";
+    this.isDossierSelected = true;
   }
 }
